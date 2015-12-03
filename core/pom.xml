@@ -1,22 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.cultured.daoism</groupId>
+		<artifactId>daoism</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<groupId>net.cultured.daoism</groupId>
-	<artifactId>daoism-coreartifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Daoism Interfaces</name>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<artifactId>daoism-core</artifactId>
+	<name>Daoism Core</name>
 	<dependencies>
 		<dependency>
 			<groupId>net.cultured.util</groupId>
