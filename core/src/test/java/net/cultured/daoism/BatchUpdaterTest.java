@@ -12,6 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Verifies the implementation of {@link BatchUpdater}.
+ *
+ * @author chris
+ */
 public class BatchUpdaterTest {
 
     @SuppressWarnings("unchecked")
@@ -19,21 +24,37 @@ public class BatchUpdaterTest {
     @SuppressWarnings("unchecked")
     private final Collection<Object> data = mock(Collection.class);
 
+    /**
+     * Set up the test interactions. This test assures that the implementation
+     * method is executed when the mock object method is called.
+     */
     @Before
     public void setUpInteractions() {
         doCallRealMethod().when(this.bean).accept(this.data);
     }
 
+    /**
+     * Verify the test interactions. This test verifies that no unexpected
+     * interactions occur on the mock delegate.
+     */
     @After
     public void verifyInteractions() {
-        verify(this.bean).accept(this.data);
-        verify(this.bean).updateMany(same(this.data));
         verifyNoMoreInteractions(this.bean, this.data);
     }
 
+    /**
+     * Verify the implementation of {@link BatchUpdater#accept(Collection)}. The
+     * implementation is required to call
+     * {@link BatchUpdater#updateMany(Collection)}.
+     */
     @Test
-    public void testConsumerReturnsNormally() throws Exception {
+    public void testAccept() {
+        // Execute the test
         this.bean.accept(this.data);
+
+        // Verify that the correct methods are called.
+        verify(this.bean).accept(this.data);
+        verify(this.bean).updateMany(same(this.data));
     }
 
 }
