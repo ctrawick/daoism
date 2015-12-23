@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 /**
  * Exposes a {@link BatchCreator} as a {@link GeneratedKeyBatchCreator}. This
- * implementation uses a {@link KeyGenerator} to generate keys and a
+ * implementation uses a {@link SingleKeyGenerator} to generate keys and a
  * {@link KeySetter} to apply the generated keys to the data before using the
  * delegate to create the data records.
  *

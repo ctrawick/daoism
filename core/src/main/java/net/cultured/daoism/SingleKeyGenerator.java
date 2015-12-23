@@ -2,7 +2,7 @@ package net.cultured.daoism;
 
 import java.util.function.Supplier;
 
-public interface KeyGenerator<K> extends Supplier<K> {
+public interface SingleKeyGenerator<K> extends Supplier<K> {
     K generateKey();
 
     @Override

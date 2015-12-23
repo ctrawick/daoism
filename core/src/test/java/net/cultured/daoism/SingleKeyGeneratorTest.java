@@ -10,10 +10,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class KeyGeneratorTest {
+public class SingleKeyGeneratorTest {
 
     @SuppressWarnings("unchecked")
-    private final KeyGenerator<Object> bean = mock(KeyGenerator.class);
+    private final SingleKeyGenerator<Object> bean = mock(SingleKeyGenerator.class);
     private final Object key = new Object();
 
     @Before
