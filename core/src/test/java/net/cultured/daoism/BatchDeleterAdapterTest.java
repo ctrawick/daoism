@@ -22,7 +22,6 @@ import org.mockito.ArgumentCaptor;
 public class BatchDeleterAdapterTest {
 
     private final BatchDeleterAdapter<Object> bean = new BatchDeleterAdapter<>();
-    @SuppressWarnings("unchecked")
     private final Consumer<Collection<Object>> delegate = mock(Consumer.class);
     private final Object key = new Object();
 

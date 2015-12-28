@@ -12,7 +12,6 @@ import org.junit.Test;
 
 public class SingleCreatorTest {
 
-    @SuppressWarnings("unchecked")
     private final SingleCreator<Object> bean = mock(SingleCreator.class);
     private final Object data = new Object();
 

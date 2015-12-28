@@ -26,11 +26,8 @@ import org.junit.Test;
 public class GeneratedKeyBatchCreatorAdapterTest {
 
     private final GeneratedKeyBatchCreatorAdapter<Object, Object> bean = new GeneratedKeyBatchCreatorAdapter<>();
-    @SuppressWarnings("unchecked")
     private final Consumer<Collection<Object>> delegate = mock(Consumer.class);
-    @SuppressWarnings("unchecked")
     private final Supplier<Object> generator = mock(Supplier.class);
-    @SuppressWarnings("unchecked")
     private final BiConsumer<Object, Object> setter = mock(BiConsumer.class);
     private final Object key = new Object();
     private final Object value = new Object();

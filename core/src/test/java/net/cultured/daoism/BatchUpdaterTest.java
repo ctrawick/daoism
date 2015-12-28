@@ -19,9 +19,7 @@ import org.junit.Test;
  */
 public class BatchUpdaterTest {
 
-    @SuppressWarnings("unchecked")
     private final BatchUpdater<Object> bean = mock(BatchUpdater.class);
-    @SuppressWarnings("unchecked")
     private final Collection<Object> data = mock(Collection.class);
 
     /**

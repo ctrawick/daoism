@@ -21,11 +21,8 @@ import org.junit.Test;
  */
 public class GeneratedKeyBatchCreatorTest {
 
-    @SuppressWarnings("unchecked")
     private final GeneratedKeyBatchCreator<Object, Object> bean = mock(GeneratedKeyBatchCreator.class);
-    @SuppressWarnings("unchecked")
     private final Collection<Object> dataIn = mock(Collection.class);
-    @SuppressWarnings("unchecked")
     private final Map<Object, Object> dataOut = mock(Map.class);
 
     /**

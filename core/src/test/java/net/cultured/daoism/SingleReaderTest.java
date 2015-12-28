@@ -13,7 +13,6 @@ import org.junit.Test;
 
 public class SingleReaderTest {
 
-    @SuppressWarnings("unchecked")
     private final SingleReader<Object, Object> bean = mock(SingleReader.class);
     private final Object key = new Object();
     private final Object data = new Object();

@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class KeySetterTest {
 
-    @SuppressWarnings("unchecked")
     private final KeySetter<Object, Object> bean = mock(KeySetter.class);
     private final Object key = new Object();
     private final Object data = new Object();

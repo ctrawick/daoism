@@ -22,7 +22,6 @@ import org.mockito.ArgumentCaptor;
 public class BatchUpdaterAdapterTest {
 
     private final BatchUpdaterAdapter<Object> bean = new BatchUpdaterAdapter<>();
-    @SuppressWarnings("unchecked")
     private final Consumer<Collection<Object>> delegate = mock(Consumer.class);
     private final Object data = new Object();
 

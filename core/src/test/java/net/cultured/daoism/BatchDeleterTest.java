@@ -19,9 +19,7 @@ import org.junit.Test;
  */
 public class BatchDeleterTest {
 
-    @SuppressWarnings("unchecked")
     private final BatchDeleter<Object> bean = mock(BatchDeleter.class);
-    @SuppressWarnings("unchecked")
     private final Collection<Object> keys = mock(Collection.class);
 
     /**

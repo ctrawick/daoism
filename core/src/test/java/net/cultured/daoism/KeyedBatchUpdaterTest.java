@@ -14,9 +14,7 @@ import org.junit.Test;
 
 public class KeyedBatchUpdaterTest {
 
-    @SuppressWarnings("unchecked")
     private final KeyedBatchUpdater<Object, Object> bean = mock(KeyedBatchUpdater.class);
-    @SuppressWarnings("unchecked")
     private final Map<Object, Object> data = mock(Map.class);
 
     @Before

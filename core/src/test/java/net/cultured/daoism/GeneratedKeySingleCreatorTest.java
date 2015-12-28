@@ -19,7 +19,6 @@ import org.junit.Test;
  */
 public class GeneratedKeySingleCreatorTest {
 
-    @SuppressWarnings("unchecked")
     private final GeneratedKeySingleCreator<Object, Object> bean = mock(GeneratedKeySingleCreator.class);
     private final Object key = new Object();
     private final Object data = new Object();

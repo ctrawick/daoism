@@ -21,11 +21,8 @@ import org.junit.Test;
  */
 public class BatchReaderTest {
 
-    @SuppressWarnings("unchecked")
     private final BatchReader<Object, Object> bean = mock(BatchReader.class);
-    @SuppressWarnings("unchecked")
     private final Collection<Object> keys = mock(Collection.class);
-    @SuppressWarnings("unchecked")
     private final Map<Object, Object> data = mock(Map.class);
 
     /**

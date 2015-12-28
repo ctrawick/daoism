@@ -12,7 +12,6 @@ import org.junit.Test;
 
 public class SingleDeleterTest {
 
-    @SuppressWarnings("unchecked")
     private final SingleDeleter<Object> bean = mock(SingleDeleter.class);
     private final Object key = new Object();
 

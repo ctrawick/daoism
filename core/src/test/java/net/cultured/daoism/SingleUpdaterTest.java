@@ -12,7 +12,6 @@ import org.junit.Test;
 
 public class SingleUpdaterTest {
 
-    @SuppressWarnings("unchecked")
     private final SingleUpdater<Object> bean = mock(SingleUpdater.class);
     private final Object key = new Object();
 

@@ -22,7 +22,6 @@ import org.mockito.ArgumentCaptor;
 public class BatchCreatorAdapterTest {
 
     private final BatchCreatorAdapter<Object> bean = new BatchCreatorAdapter<>();
-    @SuppressWarnings("unchecked")
     private final Consumer<Collection<Object>> delegate = mock(Consumer.class);
     private final Object data = new Object();
 

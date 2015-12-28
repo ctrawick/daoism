@@ -23,9 +23,7 @@ import org.junit.Test;
 public class BatchReaderAdapterTest {
 
     private final BatchReaderAdapter<Object, Object> bean = new BatchReaderAdapter<>();
-    @SuppressWarnings("unchecked")
     private final Function<Collection<Object>, Map<Object, Object>> delegate = mock(Function.class);
-    @SuppressWarnings("unchecked")
     private final Map<Object, Object> ret = mock(Map.class);
     private final Object key = new Object();
     private final Object value = new Object();
