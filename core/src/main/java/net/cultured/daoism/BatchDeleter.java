@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * underlying data store efficiencies to delete multiple records in a single
  * step.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type

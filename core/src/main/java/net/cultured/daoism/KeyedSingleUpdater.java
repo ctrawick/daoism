@@ -5,7 +5,7 @@ import java.util.function.BiConsumer;
 /**
  * Updates a single record of data by key, useful for re-keying data.
  *
- * @author chris
+ * @author ctrawick
  * @param <K>
  *            the key type
  * @param <T>

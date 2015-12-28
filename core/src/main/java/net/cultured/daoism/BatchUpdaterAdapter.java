@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 /**
  * Exposes a {@link BatchUpdater} as a {@link SingleUpdater}.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <T>
  *            the data type

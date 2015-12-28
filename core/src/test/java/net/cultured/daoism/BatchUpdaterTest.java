@@ -15,7 +15,7 @@ import org.junit.Test;
 /**
  * Verifies the implementation of {@link BatchUpdater}.
  *
- * @author chris
+ * @author ctrawick
  */
 public class BatchUpdaterTest {
 

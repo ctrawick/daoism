@@ -9,7 +9,7 @@ import java.util.function.Function;
 /**
  * Exposes a {@link BatchReader} as a {@link SingleReader}.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type

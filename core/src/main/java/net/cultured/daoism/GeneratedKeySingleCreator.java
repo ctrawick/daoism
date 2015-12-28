@@ -5,7 +5,7 @@ import java.util.function.Function;
 /**
  * Creates a single data record where the key is auto-generated.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type

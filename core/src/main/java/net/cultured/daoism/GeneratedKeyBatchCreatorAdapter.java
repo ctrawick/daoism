@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  * {@link KeySetter} to apply the generated keys to the data before using the
  * delegate to create the data records.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type

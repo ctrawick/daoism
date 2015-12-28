@@ -17,7 +17,7 @@ import org.mockito.ArgumentCaptor;
 /**
  * Verifies the implementation of {@link BatchUpdaterAdapter}.
  *
- * @author chris
+ * @author ctrawick
  */
 public class BatchUpdaterAdapterTest {
 

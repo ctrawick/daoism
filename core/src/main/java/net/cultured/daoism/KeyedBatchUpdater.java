@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * this interface take advantage of underlying data store efficiencies to update
  * multiple records in a single step.
  *
- * @author chris
+ * @author ctrawick
  * @param <K>
  *            the key type
  * @param <T>

@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 /**
  * Exposes a {@link BatchDeleter} as a {@link SingleDeleter}.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type

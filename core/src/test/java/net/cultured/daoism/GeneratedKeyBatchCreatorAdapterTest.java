@@ -21,7 +21,7 @@ import org.junit.Test;
 /**
  * Verifies the implementation of {@link GeneratedKeyBatchCreatorAdapter}.
  *
- * @author chris
+ * @author ctrawick
  */
 public class GeneratedKeyBatchCreatorAdapterTest {
 

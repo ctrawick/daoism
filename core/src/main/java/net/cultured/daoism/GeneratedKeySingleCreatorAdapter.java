@@ -10,7 +10,7 @@ import java.util.function.Function;
  * Exposes a {@link GeneratedKeyBatchCreator} as a
  * {@link GeneratedKeySingleCreator}.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type

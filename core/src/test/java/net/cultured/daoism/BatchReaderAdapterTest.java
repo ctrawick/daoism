@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Verifies the implementation of {@link BatchReader}.
  *
- * @author chris
+ * @author ctrawick
  */
 public class BatchReaderAdapterTest {
 

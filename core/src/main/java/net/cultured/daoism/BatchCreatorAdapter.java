@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 /**
  * Exposes a {@link BatchCreator} as a {@link SingleCreator}.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <T>
  *            the data type

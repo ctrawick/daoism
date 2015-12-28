@@ -9,7 +9,7 @@ import java.util.function.Function;
  * this interface take advantage of underlying data store efficiencies to create
  * multiple records in a single step.
  *
- * @author chris
+ * @author ctrawick
  *
  * @param <K>
  *            the key type
