@@ -41,8 +41,6 @@ public class GeneratedKeyBatchCreatorTest {
      */
     @After
     public void verifyInteractions() {
-        verify(this.bean).apply(this.dataIn);
-        verify(this.bean).createMany(same(this.dataIn));
         verifyNoMoreInteractions(this.bean, this.dataIn, this.dataOut);
     }
 
