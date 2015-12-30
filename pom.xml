@@ -23,5 +23,6 @@
   </build>
   <modules>
     <module>core</module>
+    <module>daoism-spring-jdbc</module>
   </modules>
 </project>

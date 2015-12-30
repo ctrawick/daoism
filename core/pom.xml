@@ -13,11 +13,6 @@
   <name>Daoism Core</name>
   <dependencies>
     <dependency>
-      <groupId>net.cultured.util</groupId>
-      <artifactId>cultured-util</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
@@ -27,6 +22,7 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>2.0.31-beta</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
