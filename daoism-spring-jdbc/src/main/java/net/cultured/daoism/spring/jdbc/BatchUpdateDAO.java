@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class BatchUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
     private Logger log = LoggerFactory.getLogger(getClass());
-    private Function<Collection<T>, BatchOperationImpl> operationDelegate;
+    private Function<Collection<T>, BatchOperation> operationDelegate;
 
     public Logger getLog() {
         return this.log;
@@ -23,17 +23,17 @@ public class BatchUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
         this.log = log;
     }
 
-    public Function<Collection<T>, BatchOperationImpl> getOperationDelegate() {
+    public Function<Collection<T>, BatchOperation> getOperationDelegate() {
         return this.operationDelegate;
     }
 
-    public void setOperationDelegate(final Function<Collection<T>, BatchOperationImpl> operationDelegate) {
+    public void setOperationDelegate(final Function<Collection<T>, BatchOperation> operationDelegate) {
         this.operationDelegate = operationDelegate;
     }
 
     public void doUpdate(final Collection<T> batch) {
         // Get the batch operation.
-        final BatchOperationImpl op = this.operationDelegate.apply(batch);
+        final BatchOperation op = this.operationDelegate.apply(batch);
 
         // Execute the batch.
         final String sql = op.getSql();

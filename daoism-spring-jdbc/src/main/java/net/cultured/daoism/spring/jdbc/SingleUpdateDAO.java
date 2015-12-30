@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class SingleUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
     private Logger log = LoggerFactory.getLogger(getClass());
-    private Function<T, SingleOperationImpl> operationDelegate;
+    private Function<T, SingleOperation> operationDelegate;
 
     public Logger getLog() {
         return this.log;
@@ -20,17 +20,17 @@ public class SingleUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
         this.log = log;
     }
 
-    public Function<T, SingleOperationImpl> getOperationDelegate() {
+    public Function<T, SingleOperation> getOperationDelegate() {
         return this.operationDelegate;
     }
 
-    public void setOperationDelegate(final Function<T, SingleOperationImpl> operationDelegate) {
+    public void setOperationDelegate(final Function<T, SingleOperation> operationDelegate) {
         this.operationDelegate = operationDelegate;
     }
 
     public void doUpdate(final T data) {
         // Get the update operation.
-        final SingleOperationImpl op = this.operationDelegate.apply(data);
+        final SingleOperation op = this.operationDelegate.apply(data);
 
         // Execute the update.
         final String sql = op.getSql();

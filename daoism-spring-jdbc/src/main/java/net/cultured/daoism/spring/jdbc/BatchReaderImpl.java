@@ -18,7 +18,7 @@ import net.cultured.daoism.BatchReader;
 
 public class BatchReaderImpl<K, T> extends NamedParameterJdbcDaoSupport implements BatchReader<K, T> {
     private Logger log = LoggerFactory.getLogger(getClass());
-    private Function<Collection<K>, SingleOperationImpl> operationDelegate;
+    private Function<Collection<K>, SingleOperation> operationDelegate;
     private RowMapper<T> rowMapper;
     private Supplier<Map<K, T>> mapSupplier = () -> new LinkedHashMap<>();
     private Function<T, K> keyGetter;
@@ -31,11 +31,11 @@ public class BatchReaderImpl<K, T> extends NamedParameterJdbcDaoSupport implemen
         this.log = log;
     }
 
-    public Function<Collection<K>, SingleOperationImpl> getOperationDelegate() {
+    public Function<Collection<K>, SingleOperation> getOperationDelegate() {
         return this.operationDelegate;
     }
 
-    public void setOperationDelegate(final Function<Collection<K>, SingleOperationImpl> operationDelegate) {
+    public void setOperationDelegate(final Function<Collection<K>, SingleOperation> operationDelegate) {
         this.operationDelegate = operationDelegate;
     }
 
@@ -66,7 +66,7 @@ public class BatchReaderImpl<K, T> extends NamedParameterJdbcDaoSupport implemen
     @Override
     public Map<K, T> readMany(final Collection<K> keys) {
         // Get the batch operation.
-        final SingleOperationImpl op = this.operationDelegate.apply(keys);
+        final SingleOperation op = this.operationDelegate.apply(keys);
 
         // Execute the query.
         final String sql = op.getSql();

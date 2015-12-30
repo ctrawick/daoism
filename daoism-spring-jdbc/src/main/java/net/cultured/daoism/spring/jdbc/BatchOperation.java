@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-public class BatchOperationImpl {
+public class BatchOperation {
     private String sql;
     private List<SqlParameterSource> parameterBatch;
 

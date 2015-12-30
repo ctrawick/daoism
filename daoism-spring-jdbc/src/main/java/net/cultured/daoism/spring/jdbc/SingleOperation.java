@@ -2,7 +2,7 @@ package net.cultured.daoism.spring.jdbc;
 
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-public class SingleOperationImpl {
+public class SingleOperation {
     private String sql;
     private SqlParameterSource parameters;
 

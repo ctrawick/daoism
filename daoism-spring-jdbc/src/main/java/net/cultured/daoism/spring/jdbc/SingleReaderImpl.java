@@ -10,14 +10,14 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import net.cultured.daoism.SingleReader;
 
 public class SingleReaderImpl<K, T> extends NamedParameterJdbcDaoSupport implements SingleReader<K, T> {
-    private Function<K, SingleOperationImpl> operationDelegate;
+    private Function<K, SingleOperation> operationDelegate;
     private RowMapper<T> rowMapper;
 
-    public Function<K, SingleOperationImpl> getOperationDelegate() {
+    public Function<K, SingleOperation> getOperationDelegate() {
         return this.operationDelegate;
     }
 
-    public void setOperationDelegate(final Function<K, SingleOperationImpl> operationDelegate) {
+    public void setOperationDelegate(final Function<K, SingleOperation> operationDelegate) {
         this.operationDelegate = operationDelegate;
     }
 
@@ -31,7 +31,7 @@ public class SingleReaderImpl<K, T> extends NamedParameterJdbcDaoSupport impleme
 
     @Override
     public T readOne(final K key) {
-        final SingleOperationImpl op = this.operationDelegate.apply(key);
+        final SingleOperation op = this.operationDelegate.apply(key);
         final String sql = op.getSql();
         final SqlParameterSource parameters = op.getParameters();
         final NamedParameterJdbcTemplate template = getNamedParameterJdbcTemplate();
