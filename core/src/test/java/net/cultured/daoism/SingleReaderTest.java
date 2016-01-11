@@ -2,7 +2,6 @@ package net.cultured.daoism;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -10,6 +9,8 @@ import static org.mockito.Mockito.when;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Verify the implementation of {@link SingleReader}.
@@ -18,7 +19,8 @@ import org.junit.Test;
  */
 public class SingleReaderTest {
 
-    private final SingleReader<Object, Object> bean = mock(SingleReader.class);
+    @Mock
+    private SingleReader<Object, Object> bean;
     private final Object key = new Object();
     private final Object data = new Object();
 
@@ -28,6 +30,7 @@ public class SingleReaderTest {
      */
     @Before
     public void setUpInteractions() {
+        MockitoAnnotations.initMocks(this);
         when(this.bean.apply(this.key)).thenCallRealMethod();
         when(this.bean.readOne(this.key)).thenReturn(this.data);
     }

@@ -2,7 +2,6 @@ package net.cultured.daoism;
 
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.doCallRealMethod;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -11,6 +10,8 @@ import java.util.Collection;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Verifies the implementation of {@link BatchCreator}.
@@ -19,8 +20,10 @@ import org.junit.Test;
  */
 public class BatchDeleterTest {
 
-    private final BatchDeleter<Object> bean = mock(BatchDeleter.class);
-    private final Collection<Object> keys = mock(Collection.class);
+    @Mock
+    private BatchDeleter<Object> bean;
+    @Mock
+    private Collection<Object> keys;
 
     /**
      * Set up the test interactions. This test assures that the implementation
@@ -28,6 +31,7 @@ public class BatchDeleterTest {
      */
     @Before
     public void setUpInteractions() {
+        MockitoAnnotations.initMocks(this);
         doCallRealMethod().when(this.bean).accept(this.keys);
     }
 

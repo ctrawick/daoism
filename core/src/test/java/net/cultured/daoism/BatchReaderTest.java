@@ -2,7 +2,6 @@ package net.cultured.daoism;
 
 import static org.junit.Assert.assertSame;
 import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -13,6 +12,8 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Verifies the implementation of {@link BatchReader}.
@@ -21,9 +22,12 @@ import org.junit.Test;
  */
 public class BatchReaderTest {
 
-    private final BatchReader<Object, Object> bean = mock(BatchReader.class);
-    private final Collection<Object> keys = mock(Collection.class);
-    private final Map<Object, Object> data = mock(Map.class);
+    @Mock
+    private BatchReader<Object, Object> bean;
+    @Mock
+    private Collection<Object> keys;
+    @Mock
+    private Map<Object, Object> data;
 
     /**
      * Set up the test interactions. This test assures that the implementation
@@ -31,6 +35,7 @@ public class BatchReaderTest {
      */
     @Before
     public void setUpInteractions() {
+        MockitoAnnotations.initMocks(this);
         when(this.bean.apply(this.keys)).thenCallRealMethod();
         when(this.bean.readMany(this.keys)).thenReturn(this.data);
         when(this.bean.readMany(this.keys)).thenReturn(this.data);

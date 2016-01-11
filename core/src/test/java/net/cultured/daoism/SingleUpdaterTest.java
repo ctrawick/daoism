@@ -2,13 +2,14 @@ package net.cultured.daoism;
 
 import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.doCallRealMethod;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Verify the implementation of {@link SingleUpdater}.
@@ -17,7 +18,8 @@ import org.junit.Test;
  */
 public class SingleUpdaterTest {
 
-    private final SingleUpdater<Object> bean = mock(SingleUpdater.class);
+    @Mock
+    private SingleUpdater<Object> bean;
     private final Object key = new Object();
 
     /**
@@ -26,6 +28,7 @@ public class SingleUpdaterTest {
      */
     @Before
     public void setUpInteractions() {
+        MockitoAnnotations.initMocks(this);
         doCallRealMethod().when(this.bean).accept(this.key);
     }
 

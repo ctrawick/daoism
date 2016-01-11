@@ -9,6 +9,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Verify the implementation of {@link SingleDeleter}.
@@ -17,6 +19,7 @@ import org.junit.Test;
  */
 public class SingleDeleterTest {
 
+    @Mock
     private final SingleDeleter<Object> bean = mock(SingleDeleter.class);
     private final Object key = new Object();
 
@@ -26,6 +29,7 @@ public class SingleDeleterTest {
      */
     @Before
     public void setUpInteractions() {
+        MockitoAnnotations.initMocks(this);
         doCallRealMethod().when(this.bean).accept(this.key);
     }
 

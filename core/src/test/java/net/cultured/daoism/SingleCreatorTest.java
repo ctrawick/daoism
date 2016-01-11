@@ -9,6 +9,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * Verify the implementation of {@link SingleCreator}.
@@ -17,6 +19,7 @@ import org.junit.Test;
  */
 public class SingleCreatorTest {
 
+    @Mock
     private final SingleCreator<Object> bean = mock(SingleCreator.class);
     private final Object data = new Object();
 
@@ -26,6 +29,7 @@ public class SingleCreatorTest {
      */
     @Before
     public void setUpInteractions() {
+        MockitoAnnotations.initMocks(this);
         doCallRealMethod().when(this.bean).accept(this.data);
     }
 
