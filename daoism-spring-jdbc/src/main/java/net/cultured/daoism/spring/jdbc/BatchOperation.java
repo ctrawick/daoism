@@ -1,12 +1,10 @@
 package net.cultured.daoism.spring.jdbc;
 
-import java.util.List;
-
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class BatchOperation {
     private String sql;
-    private List<SqlParameterSource> parameterBatch;
+    private SqlParameterSource[] parameterBatch;
 
     public String getSql() {
         return this.sql;
@@ -16,11 +14,11 @@ public class BatchOperation {
         this.sql = sql;
     }
 
-    public List<SqlParameterSource> getParameterBatch() {
+    public SqlParameterSource[] getParameterBatch() {
         return this.parameterBatch;
     }
 
-    public void setParameterBatch(final List<SqlParameterSource> parameterBatch) {
+    public void setParameterBatch(final SqlParameterSource[] parameterBatch) {
         this.parameterBatch = parameterBatch;
     }
 }

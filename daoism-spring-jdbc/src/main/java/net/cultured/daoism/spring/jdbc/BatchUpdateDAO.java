@@ -2,7 +2,6 @@ package net.cultured.daoism.spring.jdbc;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Function;
 
 import org.slf4j.Logger;
@@ -37,11 +36,9 @@ public class BatchUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
 
         // Execute the batch.
         final String sql = op.getSql();
-        final List<SqlParameterSource> parameterBatch = op.getParameterBatch();
+        final SqlParameterSource[] parameterBatch = op.getParameterBatch();
         final NamedParameterJdbcTemplate template = getNamedParameterJdbcTemplate();
-        final int batchSize = parameterBatch.size();
-        final SqlParameterSource[] batchValues = parameterBatch.toArray(new SqlParameterSource[batchSize]);
-        final int[] counts = template.batchUpdate(sql, batchValues);
+        final int[] counts = template.batchUpdate(sql, parameterBatch);
 
         // Validate update counts. All counts should equal 1 because each batch
         // entry should only affect one record. Otherwise, log a warning. All
