@@ -1,26 +1,22 @@
 package net.cultured.daoism.spring.jdbc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class BatchUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
-    private Logger log = LoggerFactory.getLogger(getClass());
+
     private Function<Collection<T>, BatchOperation> operationDelegate;
-
-    public Logger getLog() {
-        return this.log;
-    }
-
-    public void setLog(final Logger log) {
-        this.log = log;
-    }
+    private BiFunction<List<Integer>, List<T>, Boolean> updateCountValidator = new DefaultBatchUpdateValidator<>();
+    private Class<T> dataClass;
 
     public Function<Collection<T>, BatchOperation> getOperationDelegate() {
         return this.operationDelegate;
@@ -30,26 +26,58 @@ public class BatchUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
         this.operationDelegate = operationDelegate;
     }
 
+    public BiFunction<List<Integer>, List<T>, Boolean> getUpdateCountValidator() {
+        return this.updateCountValidator;
+    }
+
+    public void setUpdateCountValidator(final BiFunction<List<Integer>, List<T>, Boolean> updateCountValidator) {
+        this.updateCountValidator = updateCountValidator;
+    }
+
+    public Class<T> getDataClass() {
+        return this.dataClass;
+    }
+
+    public void setDataClass(final Class<T> dataClass) {
+        this.dataClass = dataClass;
+    }
+
+    /**
+     * Perform a batch update. This implementation obtains SQL and batch
+     * parameters from the operation delegate, calls the Spring JDBC template,
+     * and validates each update count.
+     *
+     * @param batch
+     *            the data to update
+     * @see NamedParameterJdbcTemplate#batchUpdate(String, SqlParameterSource[])
+     * @throws NullPointerException
+     *             if {@link #setOperationDelegate(Function)} hasn't been called
+     *             with a non-null reference
+     * @throws NullPointerException
+     *             if {@link #setDataClass(Class)} hasn't been called with a
+     *             non-null reference
+     * @throws InvalidUpdateCountException
+     *             if the update count validator returns false
+     */
     public void doUpdate(final Collection<T> batch) {
+        // Collections don't lock in a data order, so convert the batch to a
+        // list.
+        final List<T> data = new ArrayList<>(batch);
+
         // Get the batch operation.
-        final BatchOperation op = this.operationDelegate.apply(batch);
+        final BatchOperation op = this.operationDelegate.apply(data);
 
         // Execute the batch.
         final String sql = op.getSql();
         final SqlParameterSource[] parameterBatch = op.getParameterBatch();
         final NamedParameterJdbcTemplate template = getNamedParameterJdbcTemplate();
-        final int[] counts = template.batchUpdate(sql, parameterBatch);
+        final int[] updateCounts = template.batchUpdate(sql, parameterBatch);
 
-        // Validate update counts. All counts should equal 1 because each batch
-        // entry should only affect one record. Otherwise, log a warning. All
-        // warnings should be investigated as it is a potential application
-        // security issue.
-        for (int i = 0; i < counts.length; i++) {
-            final int count = counts[i];
-            if (count != 1) {
-                final String fmt = "Invalid update count: expected 1, got %d (data=%s)";
-                final T data = new ArrayList<>(batch).get(i);
-                this.log.warn(fmt, count, data);
+        if (this.updateCountValidator != null) {
+            // Validate update counts using the configured validator.
+            final List<Integer> countList = Arrays.stream(updateCounts).boxed().collect(Collectors.toList());
+            if (!this.updateCountValidator.apply(countList, data)) {
+                throw new InvalidUpdateCountException("Update count validation failed");
             }
         }
     }

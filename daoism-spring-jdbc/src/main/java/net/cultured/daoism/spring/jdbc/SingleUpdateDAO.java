@@ -1,24 +1,15 @@
 package net.cultured.daoism.spring.jdbc;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class SingleUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
-    private Logger log = LoggerFactory.getLogger(getClass());
     private Function<T, SingleOperation> operationDelegate;
-
-    public Logger getLog() {
-        return this.log;
-    }
-
-    public void setLog(final Logger log) {
-        this.log = log;
-    }
+    private BiFunction<Integer, T, Boolean> updateCountValidator = new DefaultSingleUpdateValidator<>();
 
     public Function<T, SingleOperation> getOperationDelegate() {
         return this.operationDelegate;
@@ -26,6 +17,14 @@ public class SingleUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
 
     public void setOperationDelegate(final Function<T, SingleOperation> operationDelegate) {
         this.operationDelegate = operationDelegate;
+    }
+
+    public BiFunction<Integer, T, Boolean> getUpdateCountValidator() {
+        return this.updateCountValidator;
+    }
+
+    public void setUpdateCountValidator(final BiFunction<Integer, T, Boolean> updateCountValidator) {
+        this.updateCountValidator = updateCountValidator;
     }
 
     public void doUpdate(final T data) {
@@ -38,13 +37,9 @@ public class SingleUpdateDAO<T> extends NamedParameterJdbcDaoSupport {
         final NamedParameterJdbcTemplate template = getNamedParameterJdbcTemplate();
         final int count = template.update(sql, paramSource);
 
-        // Validate the update count is equal to 1 because the data object
-        // should only affect one record. Otherwise, log a warning. All warnings
-        // should be investigated as it is a potential application security
-        // issue.
-        if (count != 1) {
-            final String fmt = "Invalid update count: expected 1, got %d (data=%s)";
-            this.log.warn(fmt, count, data);
+        // Validate update counts using the configured validator.
+        if (this.updateCountValidator != null && !this.updateCountValidator.apply(count, data)) {
+            throw new InvalidUpdateCountException("Update count validation failed");
         }
     }
 }
